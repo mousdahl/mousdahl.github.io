@@ -1,8 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-    <head>
-        <title>FIBBS - Fountain Island Bulletin Board System</title>
-    </head>
-    <body>
-    Hello World!    
-    </body>
-</html>>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <title>FIBBS - Fountain Island Bulletin Board System</title>
+
+    <link rel="stylesheet" href="styles/fonts.css" media="all">
+    <link rel="stylesheet" href="styles/crt.css" media="all">
+    <link rel="stylesheet" href="styles/menus.css" media="all">
+    <link rel="stylesheet" href="styles/tele.css" media="all">
+
+</head>
+
+<body onresize="posWindows();" onload="loadColor();">
+    <img class="crt-frame" src="img/crt_green_mask.png">
+    <div id="screen">
+        <div id="content" class="frame"
+            style="height: 800px; filter: url(#SphereMapTest) url(#contrast) url(#brightness) url(#colorfill);">
+            <div style="display: none; position: absolute; top;-9999; z-index:0; visibility;: hidden;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svg-root"
+                    width="381" height="166" z-index="-1">
+                    <title id="test-title">filters-dispMap-BE-16</title>
+                    <desc id="test-desc">Test which verifies the basic facilities of feDisplacementMap.</desc>
+                    <defs>
+                        <filter id="SphereMapTest" filterUnits="objectBoundingBox" x="-0.45" y="-1.29" width="1.6"
+                            height="3.5">
+                            <feImage id="mapa" result="Map" xlink:href="img/sphere_wide_1.png" />
+                            <feDisplacementMap id="despMap" in="SourceGraphic" in2="map" scale="100"
+                                xChannelSelector="R" yChannelSelector="G" />
+                        </filter>
+                        <filter id="colorfill" z-index="1">
+                            <feColorMatrix id="colorMain" type="matrix" in="SourceGraphic" result="B" values="
+				1	0	0	0	0
+				0	1	0	0	0
+				0	0	1	0	0
+				0	0	0	1	0
+				">
+                                <animate id="colA" attributeName="values" begin="0s" dur="3.5s" restart_="always"
+                                    repeatCount="1" values="
+				1	0	0	0	0
+				0	1	0	0	0
+				0	0	1	0	0
+				0	0	0	1	0;
+				1	0	0	0	0
+				0	1	0	0	0
+				0	0	1	0	0
+				0	0	0	1	0
+
+			" fill="freeze" />
+                            </feColorMatrix>
+                            <feMerge>
+                                <feMergeNode in="A" />
+                                <feMergeNode in="B" />
+                            </feMerge>
+                        </filter>
+                        <filter id="secondFill" z-index="0">
+                            <feColorMatrix id="colorSec" type="matrix" in="SourceGraphic" values="
+				0	0	0	0	0
+				0	1	0	0	0
+				0	0	0	0	0
+				0	0	0	1	0 
+                 " />
+                        </filter>
+                        <filter id="brightness">
+                            <feComponentTransfer>
+                                <feFuncR id="brR" type="linear" slope="1" />
+                                <feFuncG id="brG" type="linear" slope="1" />
+                                <feFuncB id="brB" type="linear" slope="1" />
+                            </feComponentTransfer>
+                        </filter>
+                        <filter id="contrast">
+                            <feComponentTransfer>
+                                <feFuncR id="conR" type="linear" slope="1" intercept="0" />
+                                <feFuncG id="conG" type="linear" slope="1" intercept="0" />
+                                <feFuncB id="conB" type="linear" slope="1" intercept="0" />
+                            </feComponentTransfer>
+                        </filter>
+
+                    </defs>
+                </svg>
+            </div>
+            <!-- MENU  -->
+            <div id="menu">
+                <ul>
+                    <!-- HOME  -->
+                    <li><a href="https://mousdahl.github.io/">&nbsp;&nbsp;FIBBS Home</a></li>
+                    <!-- TOC  -->
+                    <li><a href="index.html">Index</a></li>
+                    <!-- HELP  -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Help</a>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showWin(&#39;help&#39;,&#39;visible&#39;);return false;">Help</a>
+                            <a href="#" onclick="showWin(&#39;about&#39;,&#39;visible&#39;);return false;">About</a>
+                            <a href="#" onclick="showWin(&#39;credits&#39;,&#39;visible&#39;);return false;">Credits</a>
+                        </div>
+                    </li>
+                    <!-- Controls  -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Controls</a>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showWin('colorControls','visible');return false;">Color controls</a>
+                        </div>
+                    </li>
+                    <!-- CLOCK  -->
+                    <span id="clock">2022/07/30 6:57:37</span>
+                </ul>
+            </div>
+            <!-- MENU  -->
+            <p align="center">
+                <br><br>
+                FIBBS
+                <br><br>
+                Fountain Island Bulletin Board System
+            </p>
+            <div align="center">Under construction.  Please check back soon!</div>
+
+            <div id="help" class="windows">
+                <table cellspacing="0" cellpadding="4" border="1" width="95%">
+                    <tbody>
+                        <tr>
+                            <td align="center" class="tdWindow"><br>
+                                <h1>HELP</h1><br>
+                                Open the controls pane in the menu "Help-&gt;Controls"<br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" class="tdWindow">
+                                <span class="textbutton"
+                                    onclick="showWin(&#39;help&#39;,&#39;hidden&#39;);return false;"><br>[&nbsp;OK&nbsp;]<br><br></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="about" class="windows">
+                <table cellspacing="0" cellpadding="4" border="1" width="95%">
+                    <tbody>
+                        <tr>
+                            <td align="center" class="tdWindow"><br>
+                                <h1>ABOUT</h1>
+                                <br>
+                                This bulletin board system is maintained by H. Edmund Lewwy
+                                <br><br>
+                                The contents of this BBS do not reflect the positions or opinions of the Town of Fountain Island, its municipality, or the county therein, 
+                                and are solely the expressed thoughts of H. Edmund Lewwy and the users of this system.
+                                <br><br>
+                                The laws don't exist yet to regulate any of this shit.
+                                <br><br>
+                                GO VELOCIRAPTORS!
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" class="tdWindow">
+                                <span class="textbutton"
+                                    onclick="showWin(&#39;about&#39;,&#39;hidden&#39;);return false;"><br>[&nbsp;OK&nbsp;]<br><br></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="credits" class="windows">
+                <table cellspacing="0" cellpadding="4" border="1" width="95%">
+                    <tbody>
+                        <tr>
+                            <td align="center" class="tdWindow"><br>
+                                <h1>CREDITS</h1><br>
+                                Fonts downloaded from here, <a href="https://int10h.org/oldschool-pc-fonts/fontlist/"
+                                    target="_blank">Int10h</a>. Int 10h is a BIOS interruption to access the display in
+                                80x computers.<br>
+                                Also from <a href="https://int10h.org/" target="_blank">Int10h</a> got a <a
+                                    href="https://int10h.org/blog/2021/01/simulating-crt-monitors-ffmpeg-pt-1-color/"
+                                    target="_blank"> script </a> named ffcrt to transform the original videos into CRT
+                                looking ones.<br>
+                                The effects of this page are inspired and some code borrowed from <a
+                                    href="https://dev.to/ekeijl/retro-crt-terminal-screen-in-css-js-4afh%20target="
+                                    _blank"=""> Edwin at dev.to</a> and the related ones.
+                                The bevel is from <a href="https://scar45.github.io/retro-crt-startpage/index.html"
+                                    target="_blank">Retro CRT Startpage</a>. <a
+                                    href="https://github.com/custom-start-page/retro-crt" target="_blank">Here is his
+                                    git.</a><br>
+                                <a href="http://www.arachnoid.com/arachnophilia" target="_blank">Arachnophilia</a> and
+                                <a href="https://notepad-plus-plus.org/" target="_blank">notepad++</a> were used to
+                                write the HTML, javascript and CSS of this page.<br>
+                                <a href="https://obsproject.com/" target="_blank">OBS Studio</a> to capture the
+                                games.<br>
+                                <a href="https://shotcut.org/" target="_blank">Shotcut</a> to edit and recompress.<br>
+                                <a href="https://ffmpeg.org/" target="_blank">ffmpeg</a> is used by ffcrt, the Int10h
+                                script.<br>
+                                Screen dirt from the <a href="https://www.nexusmods.com/fallout4/mods/2595/"
+                                    target="_blank">Inmersive Pip-Boy Cracked Screen</a>.<br>
+                                <a href="https://www.irfanview.com/" target="_blank">Irfanview</a> and <a
+                                    href="https://www.gimp.org/" target="_blank">Gimp</a> used to edit bitmap
+                                images.<br>
+                                <a href="https://inkscape.org/" target="_blank">Inkscape</a> for vectors.<br>
+                                How to usae SVG and CSS filters in video elements. <a
+                                    href="https://gist.github.com/rafszul/a6f28a0e4b912dd7c18b" target="_blank">rafszul
+                                    gist on the topic.</a> <a href="https://www.paulirish.com/work/videooo.xhtml"
+                                    target="_blank">Paul Irish demo.</a>
+                                <a href="https://stackoverflow.com/" target="_blank">StackOverflow</a>, <a
+                                    href="https://www.w3schools.com/" target="_blank">W3Schools</a> and <a
+                                    href="https://developer.mozilla.org/" target="_blank">Mozilla MDN</a> as sources of
+                                information.<br>
+                                <a href="https://rollercoin.com/?r=l11dxwud" target="_blank">RollerCoin</a> is a game
+                                property of their autors.<br>
+                                Licensed under <a href="https://en.wikipedia.org/wiki/MIT_License" target="_blank">MIT
+                                    license</a>. Using <a href="http://arachnoid.com/careware/index.html"
+                                    target="_blank">careware</a> license is welcomed. Sharing is caring.<br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" class="tdWindow">
+                                <span class="textbutton"
+                                    onclick="showWin(&#39;credits&#39;,&#39;hidden&#39;);return false;"><br>[&nbsp;OK&nbsp;]<br><br></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="scanline"></div>
+        <img class="cristal" id="image" src="img/suciedad.png" style="position: fixed; left:0; top:0">
+    </div>
+    <div id="colorControls" class="windows">
+        <table cellspacing="0" cellpadding="4" border="1" width="95%" class="tableList">
+            <tr>
+                <td colspan="3" align="center" class="tdtitles tdWindow">
+                    Color Controls
+                </td>
+            </tr>
+            <tr>
+                <td align="center" class="manos tdWindow"><img src="img/vga.png" width="128" height="128" border="0"
+                        onclick="setColor('colA','svg-root','originalC')" /></td>
+                <td align="center" class="manos tdWindow"><img src="img/favicon_blue.png" width="128" height="128"
+                        border="0" onclick="setColor('colA','svg-root','blueC')" /></td>
+                <td align="center" class="manos tdWindow"><img src="img/favicon_green.png" width="128" height="128"
+                        border="0" onclick="setColor('colA','svg-root','greenC')" /></td>
+            </tr>
+            <tr>
+                <td align="center" class="manos tdWindow"><img src="img/favicon_red.png" width="128" height="128"
+                        border="0" onclick="setColor('colA','svg-root','redC')" /></td>
+                <td align="center" class="manos tdWindow"><img src="img/favicon_yel.png" width="128" height="128"
+                        border="0" onclick="setColor('colA','svg-root','yellowC')" /></td>
+                <td align="center" class="manos tdWindow"><img src="img/favicon_gray.png" width="128" height="128"
+                        border="0" onclick="setColor('colA','svg-root','grayC')" /></td>
+            </tr>
+            <tr>
+                <td align="center" colspan=3 class="tdWindow">
+                    <label for="slider-mx">Contrast</label>:
+                    <input class="slider" id="slider-con" type="range" min="0" max="2" value="1" step="0.005"
+                        oninput="brcon(this,'con');">
+                    <label for="slider-my">Brightness</label>:
+                    <input class="slider" id="slider-br" type="range" min="0" max="2" value="1" step="0.01"
+                        oninput="brcon(this,'br')"><br>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan=3 class="tdWindow">
+                    <span class="textbutton" onclick="showWin('colorControls','hidden');return false;">
+                        <br>[&nbspOK&nbsp]<br><br><br>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="js/scripts.js"></script>
+    <script src="js/colors.js"></script>
+    <script src="js/crt.js"></script>
+</body>
+
+</html>

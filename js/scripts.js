@@ -9,6 +9,15 @@ function showWin(wich,vis)
 	posWindows();
 }
 
+function showMain(content)
+{
+	elem = document.getElementsByClassName("maincontent");
+	for (let i = 0; i < elem.length; i++)
+	{
+		elem[i].style.display = elem[i].id === content ? "block" : "none";
+	}
+}
+
 function posWindows()
 {
 	elem = document.getElementsByClassName("windows");

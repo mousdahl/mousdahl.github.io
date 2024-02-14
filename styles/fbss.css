@@ -1,0 +1,32 @@
+.buyselltable
+{
+    border: 1px solid green;
+}
+
+.buyselltable th
+{
+    border: 1px solid green;
+    min-width: 7em;
+}
+
+.buyselltable td
+{
+    border: 1px solid green;
+}
+
+.starttable
+{
+    border: 1px solid green;
+    width: 35%;
+}
+
+.starttable th
+{
+    border: 1px solid green;
+    min-width: 7em;
+}
+
+.starttable td
+{
+    border: 1px solid green;
+}
